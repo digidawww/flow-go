@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/davecgh/go-spew/spew"
+
 	executionState "github.com/onflow/flow-go/engine/execution/state"
 
 	"github.com/onflow/flow-go/engine/execution/state/delta"
@@ -206,6 +208,11 @@ func (fcv *ChunkVerifier) verifyTransactionsInContext(context fvm.Context, chunk
 	if !bytes.Equal(expEndStateComm, endState) {
 		return nil, chmodels.NewCFNonMatchingFinalState(expEndStateComm, endState, chIndex, execResID), nil
 	}
+
+	fmt.Printf("CHUNK VIEW \n")
+	spew.Dump(chunkView.Interactions())
+	fmt.Printf("\\CHUNK VIEW\n")
+
 	return chunkView.SpockSecret(), nil, nil
 }
 

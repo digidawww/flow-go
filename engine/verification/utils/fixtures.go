@@ -217,7 +217,7 @@ func CompleteExecutionResultFixture(t *testing.T, chunkCount int, chain flow.Cha
 	}
 
 	result := flow.ExecutionResult{
-		BlockID: referenceBlock.ID(),
+		BlockID: blockID,
 		Chunks:  chunks,
 	}
 

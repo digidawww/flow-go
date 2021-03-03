@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/log"
 	"github.com/rs/zerolog"
@@ -168,6 +169,10 @@ func (e *blockComputer) executeBlock(
 	blockTxResults = append(blockTxResults, txResult)
 	gasUsed += txGas
 	interactions[len(interactions)-1] = systemChunkView.Interactions()
+
+	fmt.Printf("SYSTEM CHUNK\n")
+	spew.Dump(systemChunkView.Interactions())
+	fmt.Printf("\\SYSTEM CHUNK\n")
 
 	stateView.MergeView(systemChunkView)
 

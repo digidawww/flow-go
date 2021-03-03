@@ -7,6 +7,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/rs/zerolog/log"
 	"github.com/stretchr/testify/assert"
 	testifymock "github.com/stretchr/testify/mock"
@@ -386,6 +387,15 @@ func SetupMockConsensusNode(t *testing.T,
 				completeER.SpockSecrets[resultApproval.Body.ChunkIndex],
 				hasher,
 			)
+
+			fmt.Printf("VALID OR NOT? %d  %t \n", resultApproval.Body.ChunkIndex, valid)
+
+			if !valid {
+				spew.Dump(resultApproval.Body.Spock)
+				spew.Dump(completeER.SpockSecrets)
+				spew.Dump(resultApproval.Body.ChunkIndex)
+			}
+
 			assert.NoError(t, err)
 			assert.True(t, valid)
 
